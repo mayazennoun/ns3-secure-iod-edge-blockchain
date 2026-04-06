@@ -1,0 +1,52 @@
+========== RÉSULTATS SIMULATION IoD - 5 DRONES ==========
+Configuration : 802.11ac | 40 MHz | 8 Mbps/drone | 300s | AODV | Nakagami + Log-distance
+Zone mobilité : 100x100m | Random Waypoint | Speed: 5-15 m/s | Pause: 0-2s
+Blockchain delay (modélisé) : 100 ms (PoA)
+Constantes : L_cap=5ms | L_enc=0.5ms | L_dec=0.5ms | L_tx2=1ms
+
+Flow 1 (10.1.1.1 → 10.1.1.6)
+  Débit          : 8.15349 Mbps
+  L_tx (Wi-Fi)   : 10.5465 ms
+  L_total        : 117.546 ms
+  Jitter         : 1.45186 ms
+  Perte paquets  : 0.0381401 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 2 (10.1.1.2 → 10.1.1.6)
+  Débit          : 8.15356 Mbps
+  L_tx (Wi-Fi)   : 11.4594 ms
+  L_total        : 118.459 ms
+  Jitter         : 1.49466 ms
+  Perte paquets  : 0.00401608 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 3 (10.1.1.3 → 10.1.1.6)
+  Débit          : 8.14482 Mbps
+  L_tx (Wi-Fi)   : 10.4494 ms
+  L_total        : 117.449 ms
+  Jitter         : 1.41776 ms
+  Perte paquets  : 0.0695072 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 4 (10.1.1.4 → 10.1.1.6)
+  Débit          : 8.14812 Mbps
+  L_tx (Wi-Fi)   : 10.8708 ms
+  L_total        : 117.871 ms
+  Jitter         : 1.4524 ms
+  Perte paquets  : 0.0036169 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 5 (10.1.1.5 → 10.1.1.6)
+  Débit          : 8.1421 Mbps
+  L_tx (Wi-Fi)   : 12.1022 ms
+  L_total        : 119.102 ms
+  Jitter         : 1.47017 ms
+  Perte paquets  : 0.0442213 %
+  Blockchain     : 100 ms (modélisé)
+
+========== MOYENNES ==========
+  Débit moyen    : 8.1484 Mbps
+  L_tx moyen     : 11.0857 ms
+  L_total moyen  : 118.085 ms
+  Jitter moyen   : 1.45537 ms
+  Perte moyenne  : 0.03108 %

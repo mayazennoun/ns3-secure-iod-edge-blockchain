@@ -1,0 +1,181 @@
+========== RÉSULTATS SIMULATION IoD - 20 DRONES ==========
+Configuration : 802.11ac | 80 MHz | 6 Mbps/drone | 300s | AODV | Nakagami + Log-distance
+Zone mobilité : 100x100m | Random Waypoint | Speed: 5-15 m/s | Pause: 0-2s
+Blockchain delay (modélisé) : 50-150 ms (PoA)
+Constantes : L_cap=5ms | L_enc=0.5ms | L_dec=0.5ms | L_tx2=1ms
+NOTE : Saturation du canal Wi-Fi observée (120 Mbps agrégé sur 80 MHz)
+
+Flow 1 (10.1.1.1 → 10.1.1.21)
+  Débit          : 1.31082 Mbps
+  L_tx (Wi-Fi)   : 279.216 ms
+  L_total        : 386.216 ms
+  Jitter         : 5.35803 ms
+  Perte paquets  : 78.107 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 35 (10.1.1.2 → 10.1.1.21)
+  Débit          : 1.28328 Mbps
+  L_tx (Wi-Fi)   : 266.07 ms
+  L_total        : 373.07 ms
+  Jitter         : 4.15731 ms
+  Perte paquets  : 78.7461 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 36 (10.1.1.3 → 10.1.1.21)
+  Débit          : 1.28419 Mbps
+  L_tx (Wi-Fi)   : 267.194 ms
+  L_total        : 374.194 ms
+  Jitter         : 4.3367 ms
+  Perte paquets  : 78.8693 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 37 (10.1.1.4 → 10.1.1.21)
+  Débit          : 1.56378 Mbps
+  L_tx (Wi-Fi)   : 231.573 ms
+  L_total        : 338.573 ms
+  Jitter         : 4.36925 ms
+  Perte paquets  : 74.1835 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 43 (10.1.1.5 → 10.1.1.21)
+  Débit          : 1.66314 Mbps
+  L_tx (Wi-Fi)   : 260.209 ms
+  L_total        : 367.209 ms
+  Jitter         : 4.16869 ms
+  Perte paquets  : 72.4013 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 44 (10.1.1.6 → 10.1.1.21)
+  Débit          : 1.36387 Mbps
+  L_tx (Wi-Fi)   : 267.248 ms
+  L_total        : 374.248 ms
+  Jitter         : 4.57619 ms
+  Perte paquets  : 77.3092 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 45 (10.1.1.7 → 10.1.1.21)
+  Débit          : 1.46715 Mbps
+  L_tx (Wi-Fi)   : 276.624 ms
+  L_total        : 383.624 ms
+  Jitter         : 4.64895 ms
+  Perte paquets  : 75.7217 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 73 (10.1.1.8 → 10.1.1.21)
+  Débit          : 1.62574 Mbps
+  L_tx (Wi-Fi)   : 252.023 ms
+  L_total        : 359.023 ms
+  Jitter         : 4.31852 ms
+  Perte paquets  : 73.0964 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 75 (10.1.1.9 → 10.1.1.21)
+  Débit          : 1.5183 Mbps
+  L_tx (Wi-Fi)   : 248.133 ms
+  L_total        : 355.133 ms
+  Jitter         : 4.40577 ms
+  Perte paquets  : 75.0766 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 76 (10.1.1.10 → 10.1.1.21)
+  Débit          : 1.63072 Mbps
+  L_tx (Wi-Fi)   : 258.979 ms
+  L_total        : 365.979 ms
+  Jitter         : 4.45565 ms
+  Perte paquets  : 72.6721 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 78 (10.1.1.11 → 10.1.1.21)
+  Débit          : 1.55891 Mbps
+  L_tx (Wi-Fi)   : 242.126 ms
+  L_total        : 349.126 ms
+  Jitter         : 4.34001 ms
+  Perte paquets  : 74.1561 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 79 (10.1.1.12 → 10.1.1.21)
+  Débit          : 1.17361 Mbps
+  L_tx (Wi-Fi)   : 296.538 ms
+  L_total        : 403.538 ms
+  Jitter         : 4.81406 ms
+  Perte paquets  : 80.6545 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 104 (10.1.1.13 → 10.1.1.21)
+  Débit          : 1.00807 Mbps
+  L_tx (Wi-Fi)   : 295.262 ms
+  L_total        : 402.262 ms
+  Jitter         : 5.45561 ms
+  Perte paquets  : 83.0611 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 110 (10.1.1.14 → 10.1.1.21)
+  Débit          : 1.5887 Mbps
+  L_tx (Wi-Fi)   : 235.496 ms
+  L_total        : 342.496 ms
+  Jitter         : 4.35569 ms
+  Perte paquets  : 73.6052 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 114 (10.1.1.15 → 10.1.1.21)
+  Débit          : 1.32978 Mbps
+  L_tx (Wi-Fi)   : 281.093 ms
+  L_total        : 388.093 ms
+  Jitter         : 4.71142 ms
+  Perte paquets  : 77.8722 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 116 (10.1.1.16 → 10.1.1.21)
+  Débit          : 1.4533 Mbps
+  L_tx (Wi-Fi)   : 243.836 ms
+  L_total        : 350.836 ms
+  Jitter         : 4.37415 ms
+  Perte paquets  : 75.681 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 118 (10.1.1.17 → 10.1.1.21)
+  Débit          : 1.30728 Mbps
+  L_tx (Wi-Fi)   : 270.599 ms
+  L_total        : 377.599 ms
+  Jitter         : 4.56578 ms
+  Perte paquets  : 77.9164 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 121 (10.1.1.18 → 10.1.1.21)
+  Débit          : 1.65213 Mbps
+  L_tx (Wi-Fi)   : 248.982 ms
+  L_total        : 355.982 ms
+  Jitter         : 4.42319 ms
+  Perte paquets  : 72.2746 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 122 (10.1.1.19 → 10.1.1.21)
+  Débit          : 1.35057 Mbps
+  L_tx (Wi-Fi)   : 292.605 ms
+  L_total        : 399.605 ms
+  Jitter         : 4.65198 ms
+  Perte paquets  : 77.5364 %
+  Blockchain     : 100 ms (modélisé)
+
+Flow 123 (10.1.1.20 → 10.1.1.21)
+  Débit          : 1.77159 Mbps
+  L_tx (Wi-Fi)   : 245.662 ms
+  L_total        : 352.662 ms
+  Jitter         : 4.38304 ms
+  Perte paquets  : 70.5261 %
+  Blockchain     : 100 ms (modélisé)
+
+========== MOYENNES ==========
+  Débit moyen    : 1.45175 Mbps
+  L_tx moyen     : 262.072 ms
+  L_total moyen  : 369.072 ms
+  Jitter moyen   : 4.57415 ms
+  Perte moyenne  : 76.465 %
+
+========== ANALYSE ==========
+  Saturation canal Wi-Fi détectée.
+  Demande agrégée : 20 x 6 Mbps = 120 Mbps
+  Capacité canal 802.11ac 80 MHz : ~433 Mbps théorique
+  Cause réelle : partage du canal en half-duplex + overhead CSMA/CA
+  Conclusion : limite de scalabilité à nœud Edge unique identifiée.
+  Recommandation : déployer plusieurs nœuds Edge pour N > 10.
