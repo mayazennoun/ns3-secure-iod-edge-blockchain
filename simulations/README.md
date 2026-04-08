@@ -98,12 +98,6 @@ Un fichier XML de resultats bruts FlowMonitor est egalement genere dans le reper
 
 ---
 
-## Remarque sur le scenario 20 drones
-
-Le scenario a 20 drones atteint la limite de capacite du canal Wi-Fi partage. Avec une demande agregee de 120 Mbps (20 x 6 Mbps) sur un canal 802.11ac en half-duplex, le mecanisme CSMA/CA engendre une forte contention, ce qui se traduit par un taux de perte de paquets moyen de 76.5 %. Ce resultat est intentionnellement conserve tel quel car il illustre la limite de scalabilite de l'architecture a noeud Edge unique, ce qui constitue une conclusion scientifique valide discutee dans le papier.
-
----
-
 ## Generer les courbes a partir des resultats
 
 Une fois les trois simulations lancees et les resultats notes, se placer dans le dossier `results/` et executer :
@@ -113,3 +107,5 @@ python courbes_ns3.py
 ```
 
 Les courbes comparatives sont sauvegardees dans `results/figures/`.
+
+---

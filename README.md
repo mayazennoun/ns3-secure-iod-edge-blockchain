@@ -91,7 +91,7 @@ Le scenario a 5 drones delivre des performances quasi optimales, avec un debit a
 
 Le scenario a 10 drones montre une degradation moderee mais acceptable. Le debit chute a environ 6.1 Mbps en raison du partage du canal, la latence augmente legerement a 135 ms, et la perte de paquets reste bien en dessous de 0.2 %. Le systeme reste viable pour du streaming en temps reel dans ces conditions.
 
-Le scenario a 20 drones revele la limite de scalabilite de l'architecture a noeud Edge unique. Avec 20 UAVs demandant chacun 6 Mbps, la charge agregee sur le canal Wi-Fi partage atteint 120 Mbps. Le mecanisme de contention CSMA/CA en half-duplex sous 802.11ac degrade drastiquement le debit et pousse la perte de paquets a 76.5 %. Ce n'est pas un echec du cadre de securite,les mecanismes de chiffrement et d'authentification restent fonctionnels,mais un effet de saturation au niveau reseau qui motive le deploiement de plusieurs noeuds Edge pour les scenarios a grande echelle.
+Le scenario a 20 drones (LOADING)
 
 ---
 
@@ -188,8 +188,6 @@ pip install matplotlib pandas
 ---
 
 ## Reference
-
-Ce travail est base sur l'article de conference suivant soumis dans le cadre du projet de fin d'etudes :
 
 > M. Nafa, M. Zennoun, "Blockchain-Enhanced Secure Communication Framework for Real-Time Internet of Drones (IoD) Video Transmission", Laboratoire LRS, Universite Badji Mokhtar Annaba, 2025.
 

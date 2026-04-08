@@ -83,10 +83,7 @@ La largeur de bande est portee a 80 MHz conformement aux valeurs du document de 
 | Adresse IP Edge (Wi-Fi) | 10.1.1.21 |
 | Plage IP drones | 10.1.1.1 a 10.1.1.20 |
 
-Ce scenario represente la limite de scalabilite du système. La demande agregee atteint 120 Mbps (20 x 6 Mbps) sur un canal partage en half-duplex, ce qui engendre une saturation par contention CSMA/CA.
-
 ---
-
 ## Modele de trafic video
 
 Le trafic video est modelise par des flux UDP constants (CBR) generes par le composant OnOffHelper de NS-3. Chaque drone envoie des paquets de 1200 octets a un rythme calcule pour atteindre le debit cible. Les flux demarrent avec un decalage de 100 ms entre chaque drone pour simuler le delai du handshake blockchain initial.

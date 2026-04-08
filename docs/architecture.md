@@ -6,7 +6,7 @@ Ce document décrit en détail l'architecture du cadre de sécurité proposé po
 
 ## Vue d'ensemble
 
-Le système est organisé en quatre couches hiérarchiques qui interagissent selon un flux précis. Les données video ne transitent jamais par la blockchain — cette separation est fondamentale pour maintenir une latence acceptable tout en garantissant la securite.
+Le système est organisé en quatre couches hiérarchiques qui interagissent selon un flux précis. Les données video ne transitent jamais par la blockchain,cette separation est fondamentale pour maintenir une latence acceptable tout en garantissant la securite.
 
 ```
 [ Drone ]  -->  Wi-Fi 802.11ac  -->  [ Edge ]  -->  filaire 1 Gbps  -->  [ GCS ]
