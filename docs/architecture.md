@@ -11,7 +11,7 @@ Le système est organisé en quatre couches hiérarchiques qui interagissent sel
 ```
 [ Drone ]  -->  Wi-Fi 802.11ac  -->  [ Edge ]  -->  filaire 1 Gbps  -->  [ GCS ]
                                         |
-                                        | HTTP/WebSocket
+                                        | 
                                         v
                                   [ Blockchain PoA ]
 ```
