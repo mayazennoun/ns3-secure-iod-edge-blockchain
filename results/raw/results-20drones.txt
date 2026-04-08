@@ -172,10 +172,4 @@ Flow 123 (10.1.1.20 → 10.1.1.21)
   Jitter moyen   : 4.57415 ms
   Perte moyenne  : 76.465 %
 
-========== ANALYSE ==========
-  Saturation canal Wi-Fi détectée.
-  Demande agrégée : 20 x 6 Mbps = 120 Mbps
-  Capacité canal 802.11ac 80 MHz : ~433 Mbps théorique
-  Cause réelle : partage du canal en half-duplex + overhead CSMA/CA
-  Conclusion : limite de scalabilité à nœud Edge unique identifiée.
-  Recommandation : déployer plusieurs nœuds Edge pour N > 10.
+====================
