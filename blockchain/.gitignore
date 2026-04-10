@@ -11,7 +11,7 @@ coverage/
 coverage.json
 coverage-final.json
 
-# Hardhat deploy scripts output (si utilisé)
+# Hardhat deploy scripts output 
 deployments/
 
 # Logs
@@ -20,7 +20,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Environment variables (très important)
+# Environment variables 
 .env
 .env.local
 .env.*.local
@@ -37,5 +37,5 @@ Thumbs.db
 *.tmp
 *.swp
 
-# Hardhat local chain data (si tu le stockes)
+# Hardhat local chain data 
 hardhat.log
