@@ -96,7 +96,7 @@ Le scenario N=20 avec architecture multi-Edge (2 noeuds Edge independants couvra
 ## Structure du depot
 
 ```
-blockchain-iod-video-security/
+ns3-iod-simulation/
 │
 ├── README.md
 ├── LICENSE
