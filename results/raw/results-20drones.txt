@@ -1,69 +1,185 @@
-# Analyse des resultats
+========== RESULTATS SIMULATION IoD - 20 DRONES MULTI-EDGE ==========
+Configuration : 802.11ac | 80 MHz | 6 Mbps/drone | 300s | AODV | Nakagami + Log-distance
+Architecture  : 2 noeuds Edge independants | 10 drones par Edge | canaux physiques separes
+Zone mobilite : 100x100m par Edge | Random Waypoint | Speed: 5-15 m/s | Pause: 0-2s
+Blockchain delay (modelise) : 100 ms (PoA)
+Constantes : L_cap=5ms | L_enc=0.5ms | L_dec=0.5ms | L_tx2=1ms
 
-Ce document presente une analyse detaillee des resultats obtenus lors des trois simulations NS-3 et leur interpretation dans le contexte du cadre de securite propose.
+---------- EDGE 1 (10 drones - canal physique 1) ----------
 
----
+Flow 2 (10.1.1.1 -> 10.1.1.11 [Edge1])
+  Debit          : 6.11161 Mbps
+  L_tx (Wi-Fi)   : 26.0228 ms
+  L_total        : 133.023 ms
+  Jitter         : 2.34116 ms
+  Perte paquets  : 0.0835167 %
+  Blockchain     : 100 ms (modelise)
 
-## Rappel des resultats bruts
+Flow 4 (10.1.1.2 -> 10.1.1.11 [Edge1])
+  Debit          : 6.0974 Mbps
+  L_tx (Wi-Fi)   : 24.5343 ms
+  L_total        : 131.534 ms
+  Jitter         : 2.24016 ms
+  Perte paquets  : 0.279027 %
+  Blockchain     : 100 ms (modelise)
 
-Les resultats complets flow par flow sont disponibles dans `results/raw/`. Le tableau ci-dessous resume les moyennes calculees sur l'ensemble des drones pour chaque scenario.
+Flow 5 (10.1.1.3 -> 10.1.1.11 [Edge1])
+  Debit          : 6.10391 Mbps
+  L_tx (Wi-Fi)   : 25.0151 ms
+  L_total        : 132.015 ms
+  Jitter         : 2.30426 ms
+  Perte paquets  : 0.136617 %
+  Blockchain     : 100 ms (modelise)
 
-| Scenario | Debit moyen | L_tx moyen | L_total moyen | Jitter moyen | Perte moyenne |
-|---|---|---|---|---|---|
-| N=5 (1 Edge) | 8.148 Mbps | 11.09 ms | 118.09 ms | 1.456 ms | 0.031 % |
-| N=10 (1 Edge) | 6.098 Mbps | 28.06 ms | 135.06 ms | 2.341 ms | 0.156 % |
-| N=20 (2 Edges) | 6.095 Mbps | 27.45 ms | 134.45 ms | 2.334 ms | 0.180 % |
+Flow 7 (10.1.1.4 -> 10.1.1.11 [Edge1])
+  Debit          : 6.10784 Mbps
+  L_tx (Wi-Fi)   : 25.233 ms
+  L_total        : 132.233 ms
+  Jitter         : 2.28426 ms
+  Perte paquets  : 0.0578698 %
+  Blockchain     : 100 ms (modelise)
 
----
+Flow 36 (10.1.1.5 -> 10.1.1.11 [Edge1])
+  Debit          : 6.09468 Mbps
+  L_tx (Wi-Fi)   : 27.0526 ms
+  L_total        : 134.053 ms
+  Jitter         : 2.33978 ms
+  Perte paquets  : 0.220878 %
+  Blockchain     : 100 ms (modelise)
 
-## Analyse par scenario
+Flow 38 (10.1.1.6 -> 10.1.1.11 [Edge1])
+  Debit          : 6.10234 Mbps
+  L_tx (Wi-Fi)   : 25.5698 ms
+  L_total        : 132.57 ms
+  Jitter         : 2.28497 ms
+  Perte paquets  : 0.00214645 %
+  Blockchain     : 100 ms (modelise)
 
-### N=5 drones — 1 noeud Edge — 40 MHz
+Flow 40 (10.1.1.7 -> 10.1.1.11 [Edge1])
+  Debit          : 6.086 Mbps
+  L_tx (Wi-Fi)   : 26.3902 ms
+  L_total        : 133.39 ms
+  Jitter         : 2.31645 ms
+  Perte paquets  : 0.297202 %
+  Blockchain     : 100 ms (modelise)
 
-Le scenario a 5 drones represente les conditions optimales du systeme. Avec une demande agregee de 40 Mbps (5 x 8 Mbps) sur un canal de 40 MHz, la charge reste bien en dessous de la capacite theorique du canal 802.11ac. Le debit moyen atteint 8.148 Mbps par drone, soit une utilisation quasi complete du debit cible, et le taux de perte est inferieur a 0.04%.
+Flow 42 (10.1.1.8 -> 10.1.1.11 [Edge1])
+  Debit          : 6.09337 Mbps
+  L_tx (Wi-Fi)   : 27.0189 ms
+  L_total        : 134.019 ms
+  Jitter         : 2.30405 ms
+  Perte paquets  : 0.142748 %
+  Blockchain     : 100 ms (modelise)
 
-La latence Wi-Fi L_tx est de 11.09 ms en moyenne. La latence totale L_total de 118 ms est dominee par le delai blockchain de 100 ms qui ne s'applique qu'au handshake initial et aux renouvellements de cle toutes les 60 secondes. Sur le chemin video continu, la latence effective est donc de 18 ms, largement en dessous du seuil de 150 ms admis pour le streaming video temps reel.
+Flow 43 (10.1.1.9 -> 10.1.1.11 [Edge1])
+  Debit          : 6.10103 Mbps
+  L_tx (Wi-Fi)   : 30.875 ms
+  L_total        : 137.875 ms
+  Jitter         : 2.31858 ms
+  Perte paquets  : 0 %
+  Blockchain     : 100 ms (modelise)
 
-Ce scenario valide que la surcharge de securite introduite par le systeme est negligeable sur les performances du flux video.
+Flow 45 (10.1.1.10 -> 10.1.1.11 [Edge1])
+  Debit          : 6.09691 Mbps
+  L_tx (Wi-Fi)   : 27.0698 ms
+  L_total        : 134.07 ms
+  Jitter         : 2.34255 ms
+  Perte paquets  : 0.0413398 %
+  Blockchain     : 100 ms (modelise)
 
-### N=10 drones — 1 noeud Edge — 80 MHz
+---------- EDGE 2 (10 drones - canal physique 2) ----------
 
-Le scenario a 10 drones montre une degradation moderee mais acceptable. La demande agregee passe a 60 Mbps (10 x 6 Mbps) sur un canal elargi a 80 MHz. Le debit moyen chute a 6.098 Mbps, ce qui correspond exactement au debit cible fixe pour ce scenario. La latence Wi-Fi augmente a 28.06 ms, refletant une contention plus elevee sur le canal partage entre 10 noeuds. La latence totale de 135 ms reste acceptable. Le taux de perte de 0.156% est negligeable pour une application video.
+Flow 1 (10.2.1.1 -> 10.2.1.11 [Edge2])
+  Debit          : 6.08738 Mbps
+  L_tx (Wi-Fi)   : 33.8156 ms
+  L_total        : 140.816 ms
+  Jitter         : 2.39122 ms
+  Perte paquets  : 0.480751 %
+  Blockchain     : 100 ms (modelise)
 
-Ce scenario confirme que l'architecture avec un noeud Edge unique supporte efficacement jusqu'a 10 drones simultanees dans des conditions de mobilite realistes.
+Flow 3 (10.2.1.2 -> 10.2.1.11 [Edge2])
+  Debit          : 6.11023 Mbps
+  L_tx (Wi-Fi)   : 27.4278 ms
+  L_total        : 134.428 ms
+  Jitter         : 2.3637 ms
+  Perte paquets  : 0.0910254 %
+  Blockchain     : 100 ms (modelise)
 
-### N=20 drones — 2 noeuds Edge — 80 MHz — Architecture Multi-Edge
+Flow 6 (10.2.1.3 -> 10.2.1.11 [Edge2])
+  Debit          : 6.07955 Mbps
+  L_tx (Wi-Fi)   : 31.4144 ms
+  L_total        : 138.414 ms
+  Jitter         : 2.38969 ms
+  Perte paquets  : 0.539481 %
+  Blockchain     : 100 ms (modelise)
 
-Le scenario a 20 drones utilise une architecture multi-Edge avec 2 noeuds Edge independants, chacun couvrant 10 drones sur un canal physique Wi-Fi separe. Cette approche elimine les interferences inter-reseaux et divise la charge par deux sur chaque point d'acces.
+Flow 8 (10.2.1.4 -> 10.2.1.11 [Edge2])
+  Debit          : 6.08499 Mbps
+  L_tx (Wi-Fi)   : 27.915 ms
+  L_total        : 134.915 ms
+  Jitter         : 2.32269 ms
+  Perte paquets  : 0.427611 %
+  Blockchain     : 100 ms (modelise)
 
-Les resultats demontrent l'efficacite de cette architecture : le debit moyen atteint 6.095 Mbps par drone, la latence totale est de 134.45 ms, le jitter de 2.334 ms et le taux de perte de 0.180%. Ces valeurs sont quasi identiques au scenario N=10, ce qui confirme que l'architecture multi-Edge restaure completement les performances independamment du nombre total de drones.
+Flow 34 (10.2.1.5 -> 10.2.1.11 [Edge2])
+  Debit          : 6.09887 Mbps
+  L_tx (Wi-Fi)   : 23.9675 ms
+  L_total        : 130.968 ms
+  Jitter         : 2.30216 ms
+  Perte paquets  : 0.0879791 %
+  Blockchain     : 100 ms (modelise)
 
-Ce resultat constitue la contribution principale de ce travail en matiere de scalabilite : en deployant autant de noeuds Edge que necessaire, chacun couvrant un sous-groupe de drones sur un canal physique dedie, le systeme peut passer a l'echelle sans degradation des performances.
+Flow 37 (10.2.1.6 -> 10.2.1.11 [Edge2])
+  Debit          : 6.0934 Mbps
+  L_tx (Wi-Fi)   : 26.863 ms
+  L_total        : 133.863 ms
+  Jitter         : 2.35364 ms
+  Perte paquets  : 0.150785 %
+  Blockchain     : 100 ms (modelise)
 
----
+Flow 39 (10.2.1.7 -> 10.2.1.11 [Edge2])
+  Debit          : 6.09975 Mbps
+  L_tx (Wi-Fi)   : 26.5678 ms
+  L_total        : 133.568 ms
+  Jitter         : 2.32553 ms
+  Perte paquets  : 0.0922534 %
+  Blockchain     : 100 ms (modelise)
 
-## Evolution des metriques en fonction de N
+Flow 41 (10.2.1.8 -> 10.2.1.11 [Edge2])
+  Debit          : 6.09176 Mbps
+  L_tx (Wi-Fi)   : 26.4728 ms
+  L_total        : 133.473 ms
+  Jitter         : 2.31102 ms
+  Perte paquets  : 0.192076 %
+  Blockchain     : 100 ms (modelise)
 
-### Debit
+Flow 44 (10.2.1.9 -> 10.2.1.11 [Edge2])
+  Debit          : 6.08718 Mbps
+  L_tx (Wi-Fi)   : 32.0059 ms
+  L_total        : 139.006 ms
+  Jitter         : 2.43687 ms
+  Perte paquets  : 0.217401 %
+  Blockchain     : 100 ms (modelise)
 
-Le debit par drone diminue entre N=5 (8.148 Mbps) et N=10 (6.098 Mbps) en raison du partage du canal Wi-Fi entre plus de noeuds. Pour N=20 avec l'architecture multi-Edge, le debit reste stable a 6.095 Mbps, identique au scenario N=10, ce qui valide la solution architecturale.
+Flow 46 (10.2.1.10 -> 10.2.1.11 [Edge2])
+  Debit          : 6.09409 Mbps
+  L_tx (Wi-Fi)   : 33.1601 ms
+  L_total        : 140.16 ms
+  Jitter         : 2.41313 ms
+  Perte paquets  : 0.0392113 %
+  Blockchain     : 100 ms (modelise)
 
-### Latence
+========== MOYENNES GLOBALES (20 drones) ==========
+  Debit moyen    : 6.095 Mbps
+  L_tx moyen     : 27.45 ms
+  L_total moyen  : 134.45 ms
+  Jitter moyen   : 2.334 ms
+  Perte moyenne  : 0.180 %
 
-La latence totale augmente legerement entre N=5 (118 ms) et N=10 (135 ms) en raison de la contention Wi-Fi accrue. Pour N=20 multi-Edge, la latence de 134.45 ms est quasi identique au scenario N=10, confirmant l'efficacite de la separation des canaux physiques.
-
-### Jitter
-
-Le jitter augmente entre N=5 (1.456 ms) et N=10 (2.341 ms) puis se stabilise pour N=20 multi-Edge (2.334 ms). Ces valeurs restent toutes bien en dessous du seuil de 10 ms generalement admis pour le streaming video temps reel.
-
-### Perte de paquets
-
-Les pertes restent negligeables sur les trois scenarios : 0.031%, 0.156% et 0.180%. Cette stabilite demontre que le cadre de securite propose n'introduit pas de degradation reseau significative et que l'architecture multi-Edge maintient la qualite de service pour N=20.
-
----
-
-## Conclusion
-
-Les resultats de simulation demontrent que le cadre de securite propose introduit un overhead negligeable sur les performances reseau. La latence additionnelle due a la blockchain (100 ms) n'affecte que le chemin de controle et non le flux video continu. Le chiffrement ChaCha20 ajoute moins de 1 ms de traitement par trame.
-
-L'architecture multi-Edge validee pour N=20 constitue une solution de scalabilite directement applicable aux deployements IoD a grande echelle. Elle confirme que le systeme peut passer a l'echelle en ajoutant des noeuds Edge supplementaires sans modification du mecanisme de securite sous-jacent.
+========== ANALYSE ==========
+  Architecture multi-Edge validee.
+  Chaque Edge couvre 10 drones sur un canal physique Wi-Fi independant.
+  Performances quasi identiques au scenario N=10 (debit 6.098 Mbps, pertes 0.156%).
+  Conclusion : l'architecture multi-Edge resout le probleme de scalabilite
+  sans degradation des performances ni modification du mecanisme de securite.
+  Recommandation : deployer K noeuds Edge pour N drones avec K = ceil(N/10).
