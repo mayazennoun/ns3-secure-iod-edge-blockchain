@@ -1,177 +1,182 @@
-# Blockchain-Enhanced Secure Communication Framework for Real-Time Internet of Drones (IoD) Video Transmission
+# Framework de Communication Sécurisé par Blockchain pour la Transmission Vidéo en Temps Réel dans l'Internet des Drones (IoD)
 
-**Projet de Fin d'Etudes (PFE)**
-Departement Informatique
-Annee universitaire 2025/2026
-
----
-
-## Presentation
-
-Ce projet propose et evalue un cadre de securite pour la transmission video en temps reel dans les reseaux Internet of Drones (IoD). Les drones sont de plus en plus utilises dans des applications critiques — surveillance, gestion de catastrophes, inspection d'infrastructures — et leurs flux video circulent sur des canaux sans fil ouverts avec peu ou pas de protection. Ce travail repond a ce manque.
-
-Le cadre propose repose sur trois composants. Un reseau blockchain prive gere les identites et le controle d'acces, garantissant que seuls les drones enregistres peuvent etablir une session. Un chiffrement leger du flux video par ChaCha20-Poly1305 protege les donnees sans introduire une surcharge computationnelle prohibitive. Un noeud de calcul en bordure de reseau (Edge) s'intercale entre les drones et la station de controle au sol, decharge la logique d'authentification et joue le role de relais.
-
-Le systeme a ete evalue par simulation reseau sous NS-3 v3.43 selon trois scenarios : 5 drones avec un Edge unique, 10 drones avec un Edge unique, et 20 drones avec une architecture multi-Edge (2 noeuds Edge independants). Les resultats demontrent des performances acceptables et stables sur les trois scenarios.
+**Projet de Fin d'Études – Département Informatique**  
+*Année universitaire 2025/2026*
 
 ---
 
-## Architecture du systeme
+## I. Introduction
 
-L'architecture est organisee en quatre couches.
+Les drones sont de plus en plus déployés dans des applications critiques : inspection d'infrastructures, gestion de catastrophes, surveillance de sites sensibles. Pourtant, dans l'Internet des Drones (IoD), les flux vidéo empruntent des canaux sans fil ouverts, souvent sans protection native. Cette vulnérabilité expose les transmissions à des attaques par écoute, usurpation d'identité ou rejeu.
 
-La **couche drone** est responsable de la capture video et du chiffrement. Chaque UAV genere un flux UDP/RTP a 6-8 Mbps et applique le chiffrement ChaCha20-Poly1305 avec une cle de session obtenue lors du handshake d'authentification.
+Ce travail propose et évalue une solution de sécurité légère combinant **gestion d'identités par blockchain** et **chiffrement authentifié** (ChaCha20-Poly1305). L'architecture introduit un **nœud de calcul en bordure (Edge)** qui déporte la logique d'authentification hors de la station sol, réduisant ainsi la latence tout en maintenant un niveau de sécurité élevé.
 
-La **couche Edge computing** heberge la logique d'authentification et de gestion des sessions. Quand un drone demande l'acces, le noeud Edge interroge le smart contract blockchain pour verifier l'identite enregistree du drone, genere une cle de session fraiche, et relaie le flux video chiffre vers la station au sol. L'Edge gere egalement le renouvellement de la cle toutes les 60 secondes.
+Le système est évalué par simulation sur NS‑3 v3.43 selon trois scénarios :
+- 5 drones avec un nœud Edge unique,
+- 10 drones avec un nœud Edge unique,
+- 20 drones avec deux nœuds Edge indépendants (architecture multi‑Edge).
 
-La **couche reseau blockchain** est une chaine privee en Proof-of-Authority avec 4 a 10 validateurs. Elle stocke les identites et cles publiques des drones, traite les decisions d'autorisation via un smart contract, et maintient un journal d'audit immuable. Les donnees video ne passent jamais par la blockchain.
-
-La **station de controle au sol (GCS)** recoit le flux video chiffre, le dechiffre avec la cle de session courante et l'affiche en temps reel.
-
----
-
-## Protocole d'authentification
-
-Session establishment follows a three-message handshake analyzed using BAN Logic.
-
-```
-M1:  Drone  ->  Edge  :  { ID_D, N_D } signe cle privee drone
-M2:  Edge   ->  Drone :  { ID_E, N_E, N_D, K_DE, token } signe cle privee Edge
-M3:  Drone  ->  Edge  :  { N_E, Ack } signe cle privee drone
-```
-
-L'analyse BAN Logic confirme que les objectifs d'authentification mutuelle et de fraicheur de cle sont atteints sous les hypotheses standard.
+Les résultats montrent que le cadre proposé maintient des performances compatibles avec le temps réel (latence < 140 ms, pertes < 0,2 %) dans toutes les configurations. L'architecture multi‑Edge restaure efficacement le débit par drone en environnement dense.
 
 ---
 
-## Configuration de simulation
+## II. Architecture du système
 
-| Parametre | Valeur |
-|---|---|
-| Simulateur | NS-3 v3.43 |
-| Standard sans-fil | IEEE 802.11ac, 5 GHz |
-| Modele de canal | Log-distance path loss + Nakagami fading |
-| Largeur de bande | 40 MHz (N=5), 80 MHz (N=10, N=20) |
-| Puissance d'emission | 20 dBm (N=5), 23 dBm (N=10, N=20) |
-| Protocole de routage | AODV |
-| Mobilite UAV | Random Waypoint, vitesse 5-15 m/s, pause 0-2 s |
-| Zone de mobilite | 100 x 100 m par noeud Edge |
-| Debit video par UAV | 8 Mbps (N=5), 6 Mbps (N=10, N=20) |
+L'architecture s'organise en quatre couches fonctionnelles.
+
+**Couche drone** – Chaque UAV capture la vidéo, génère un flux RTP/UDP à 6–8 Mbps et applique un chiffrement ChaCha20-Poly1305 paquet par paquet, à l'aide d'une clé de session obtenue lors de l'authentification mutuelle.
+
+**Couche Edge computing** – Le nœud Edge héberge la logique d'authentification et de gestion des sessions. À la demande d'un drone, il interroge la blockchain via un contrat intelligent pour vérifier l'identité enregistrée, génère une clé de session fraîche, et relaie le flux chiffré vers la station sol. La clé est renouvelée toutes les 60 secondes.
+
+**Couche blockchain** – Chaîne privée en Proof‑of‑Authority (4 à 10 validateurs). Elle stocke les identités et clés publiques des drones, exécute les décisions d'autorisation via un contrat intelligent, et tient un journal d'audit immuable. Les données vidéo ne transitent jamais par la blockchain.
+
+**Station de contrôle au sol (GCS)** – Reçoit le flux chiffré, le déchiffre avec la clé de session courante et l'affiche en temps réel.
+
+---
+
+## III. Protocole d'authentification
+
+L'établissement de session suit un handshake à trois messages, analysé formellement par la logique BAN.
+
+| Message | Émetteur → Récepteur | Contenu |
+|---------|---------------------|---------|
+| M1 | Drone → Edge | `{ID_D, N_D}` signé avec clé privée du drone |
+| M2 | Edge → Drone | `{ID_E, N_E, N_D, K_DE, token}` signé avec clé privée de l'Edge |
+| M3 | Drone → Edge | `{N_E, Ack}` signé avec clé privée du drone |
+
+L'analyse BAN confirme que les objectifs suivants sont atteints sous les hypothèses standard :
+- Authentification mutuelle (le drone et l'Edge s'identifient réciproquement),
+- Fraîcheur de la clé de session (garantie par les nonces),
+- Confidentialité de la clé `K_DE`.
+
+---
+
+## IV. Configuration de simulation
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Simulateur | NS‑3 v3.43 |
+| Standard Wi‑Fi | IEEE 802.11ac, 5 GHz |
+| Modèle de canal | Log‑distance path loss + Nakagami fading |
+| Bande passante | 40 MHz (N=5), 80 MHz (N=10, N=20) |
+| Puissance d'émission | 20 dBm (N=5), 23 dBm (N=10, N=20) |
+| Routage | AODV |
+| Mobilité UAV | Random Waypoint (5–15 m/s, pause 0–2 s) |
+| Zone de mobilité | 100 × 100 m par nœud Edge |
+| Débit vidéo par UAV | 8 Mbps (N=5), 6 Mbps (N=10, N=20) |
 | Transport | UDP |
-| Taille des paquets | 1200 octets |
-| Duree de simulation | 300 secondes |
-| Delai blockchain | 100 ms injecte au demarrage de session |
-| Architecture N=20 | Multi-Edge : 2 noeuds Edge independants, canaux physiques separes |
+| Taille de paquet | 1200 octets |
+| Durée de simulation | 300 secondes |
+| Délai blockchain | 100 ms (injecté au démarrage de session) |
+| Architecture N=20 | Multi‑Edge : 2 nœuds Edge, canaux physiques séparés |
 
----
+La latence totale est calculée comme suit :
 
-## Resultats
-
-### Tableau recapitulatif
-
-| Scenario | Debit moyen | L_tx moyen | L_total moyen | Jitter moyen | Perte moyenne |
-|---|---|---|---|---|---|
-| N=5 (1 Edge) | 8.148 Mbps | 11.09 ms | 118.09 ms | 1.456 ms | 0.031 % |
-| N=10 (1 Edge) | 6.098 Mbps | 28.06 ms | 135.06 ms | 2.341 ms | 0.156 % |
-| N=20 (2 Edges) | 6.095 Mbps | 27.45 ms | 134.45 ms | 2.334 ms | 0.180 % |
-
-La latence bout-en-bout L_total est calculee comme suit :
-
-```
 L_total = L_cap + L_enc + L_tx + L_bc + L_tx2 + L_dec
-```
 
-avec L_cap=5ms, L_enc=0.5ms, L_bc=100ms (handshake uniquement), L_tx2=1ms, L_dec=0.5ms.
 
-### Interpretation
-
-Le scenario N=5 delivre des performances quasi optimales avec un debit de 8.15 Mbps et des pertes inferieures a 0.04%.
-
-Le scenario N=10 montre une degradation moderee due au partage du canal, avec un debit de 6.10 Mbps et des pertes inferieures a 0.2%, ce qui reste acceptable pour du streaming temps reel.
-
-Le scenario N=20 avec architecture multi-Edge (2 noeuds Edge independants couvrant chacun 10 drones sur des canaux physiques separes) restaure des performances comparables au scenario N=10, avec un debit de 6.09 Mbps et des pertes de 0.18%. Ce resultat valide l'architecture multi-Edge comme solution de scalabilite pour les deployements IoD a grande echelle.
+Avec `L_cap = 5 ms` (capture), `L_enc = 0,5 ms`, `L_bc = 100 ms` (uniquement lors du handshake), `L_tx2 = 1 ms`, `L_dec = 0,5 ms`.
 
 ---
 
-## Structure du depot
+## V. Résultats
 
-```
+### Tableau récapitulatif
+
+| Scénario | Débit moyen | L_tx moyen | L_total moyen | Jitter moyen | Perte moyenne |
+|----------|-------------|------------|---------------|--------------|----------------|
+| N=5 (1 Edge) | 8,148 Mbps | 11,09 ms | 118,09 ms | 1,456 ms | 0,031 % |
+| N=10 (1 Edge) | 6,098 Mbps | 28,06 ms | 135,06 ms | 2,341 ms | 0,156 % |
+| N=20 (2 Edges) | 6,095 Mbps | 27,45 ms | 134,45 ms | 2,334 ms | 0,180 % |
+
+### Interprétation
+
+**Scénario N=5** – Performances quasi optimales. Le canal n'est pas saturé, le débit atteint 8,15 Mbps et les pertes restent inférieures à 0,04 %. La latence totale (118 ms) est compatible avec des applications temps réel exigeantes.
+
+**Scénario N=10** – Dégradation modérée due au partage du canal unique. Le débit descend à 6,10 Mbps, la latence augmente à 135 ms, les pertes atteignent 0,16 %. Ces valeurs restent acceptables pour de la vidéosurveillance ou de l'inspection téléopérée.
+
+**Scénario N=20 (multi‑Edge)** – L'architecture distribuée (2 nœuds Edge, canaux physiques séparés) restaure des performances très proches du scénario N=10 : débit 6,09 Mbps, pertes 0,18 %, latence 134 ms. Ce résultat valide l'approche multi‑Edge comme solution de passage à l'échelle pour les déploiements IoD denses.
+
+---
+
+## VI. Structure du dépôt
+
 ns3-secure-iod-edge-blockchain/
 │
 ├── README.md
 ├── LICENSE
 ├── .gitignore
 │
+├── paper/
+│ └── Blockchain-Enhanced Secure Communication Framework for Real-Time Internet of Drones (IoD) Video Transmission.pdf
+│
 ├── simulations/
-│   ├── iod-simulation-5drones.cc      # N=5  | 1 Edge | 40 MHz | 8 Mbps
-│   ├── iod-simulation-10drones.cc     # N=10 | 1 Edge | 80 MHz | 6 Mbps
-│   ├── iod-simulation-20drones.cc     # N=20 | 2 Edges | 80 MHz | 6 Mbps
-│   └── README.md
+│ ├── iod-simulation-5drones.cc
+│ ├── iod-simulation-10drones.cc
+│ ├── iod-simulation-20drones.cc
+│ └── README.md
 │
 ├── results/
-│   ├── raw/
-│   │   ├── results-5drones.txt
-│   │   ├── results-10drones.txt
-│   │   └── results-20drones.txt
-│   ├── figures/
-│   │   ├── debit.png
-│   │   ├── latence_ns3.png
-│   │   ├── jitter.png
-│   │   ├── pertes.png
-│   │   └── resume_comparatif.png
-│   └── courbes_ns3.py
+│ ├── raw/
+│ │ ├── results-5drones.txt
+│ │ ├── results-10drones.txt
+│ │ └── results-20drones.txt
+│ │
+│ ├── figures/
+│ │ ├── debit.png
+│ │ ├── latence_ns3.png
+│ │ ├── jitter.png
+│ │ ├── pertes.png
+│ │ └── resume_comparatif.png
+│ │
+│ └── courbes_ns3.py
 │
 ├── docs/
-│   ├── architecture.md
-│   ├── simulation-setup.md
-│   └── results-analysis.md
-│  
+│ ├── architecture.md
+│ ├── simulation-setup.md
+│ └── results-analysis.md
+│
 └── attack-scenarios/
-│   ├── iod-attack-dos.cc
-│   └── iod-attack-eavesdrop.cc
-│   ├── iod-attack-replay.cc
-│   └── iod-attack-spoofing.cc
-|   └── README.md   
-|
-   
-```
+├── iod-attack-dos.cc
+├── iod-attack-eavesdrop.cc
+├── iod-attack-replay.cc
+├── iod-attack-spoofing.cc
+└── README.md
+
 
 ---
-## Comment lancer les simulations
+
+## VII. Exécution des simulations
 
 ```bash
+# Exemple pour 5 drones
 cp simulations/iod-simulation-5drones.cc ~/ns-allinone-3.43/ns-3.43/scratch/iod-simulation.cc
 cd ~/ns-allinone-3.43/ns-3.43
 ./ns3 build scratch/iod-simulation
 ./ns3 run scratch/iod-simulation
-```
 
-Repeter pour les scenarios 10 et 20 drones. Instructions detaillees dans `simulations/README.md`.
-
-```bash
+# Génération des courbes
 cd results/
 python courbes_ns3.py
-```
 
+Des instructions détaillées sont fournies dans simulations/README.md
 ---
 
-## Dependances
+## VIII. Dépendances
 
-- NS-3 v3.43 (modules : wifi, mobility, internet, applications, flow-monitor, point-to-point, aodv)
-- Python 3.x, matplotlib, pandas
+NS‑3 v3.43 (modules : wifi, mobility, internet, applications, flow-monitor, point-to-point, aodv)
 
+Python 3.x, matplotlib, pandas
 ```bash
+
 pip install matplotlib pandas
-```
 
 ---
 
-## Reference
-
-> M. Nafa, M. Zennoun, "Blockchain-Enhanced Secure Communication Framework for Real-Time Internet of Drones (IoD) Video Transmission", Laboratoire LRS, Universite Badji Mokhtar Annaba, 2026.
+## IX. Référence
+M. Nafa, M. Zennoun, "Blockchain-Enhanced Secure Communication Framework for Real-Time Internet of Drones (IoD) Video Transmission", Laboratoire LRS, Université Badji Mokhtar Annaba, 2026.
 
 ---
 
-## Licence
-
-Ce projet est publie sous la licence MIT.
+## X. Licence
+Ce projet est diffusé sous licence MIT. Libre utilisation, modification et redistribution.
