@@ -181,6 +181,7 @@ int main(int argc, char *argv[])
 
     addr.SetBase("10.2.1.0", "255.255.255.0");
     Ipv4InterfaceContainer droneIf2 = addr.Assign(droneDevs2);
+
     Ipv4InterfaceContainer edgeIf2  = addr.Assign(edgeDev2);
 
     addr.SetBase("10.3.1.0", "255.255.255.0");
